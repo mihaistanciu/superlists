@@ -2,6 +2,7 @@ from django.test import LiveServerTestCase
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
+import time
 import unittest
 
 class NewVisitor(LiveServerTestCase):
@@ -45,6 +46,7 @@ class NewVisitor(LiveServerTestCase):
         # and now the page lists "1: Buy peacock feathers" as an item in a
         # to-do list table
         inputbox.send_keys(Keys.ENTER)
+        time.sleep(5)
         edith_list_url = self.browser.current_url
         self.assertRegex(edith_list_url, '/lists/.+')
         self.check_for_row_in_list_table('1: Buy peacock feathers')
@@ -80,6 +82,7 @@ class NewVisitor(LiveServerTestCase):
         inputbox.send_keys(Keys.ENTER)
 
         # Francis gets his own unique URL
+        time.sleep(5)
         francis_list_url = self.browser.current_url
         self.assertRegex(francis_list_url, '/lists/.+')
         self.assertNotEqual(francis_list_url, edith_list_url)
